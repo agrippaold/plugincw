@@ -1,0 +1,270 @@
+$diameter: 500px;
+$numberOfSlices: 12;
+$radius: ($diameter / 2);
+$circumfrance: (6.283185307 * $radius);
+$sliceHeight: ($circumfrance / $numberOfSlices);
+$sliceOffeset: ($sliceHeight / 2);
+/*$sliceColor: #095B8D;*/
+$sliceColor: #61CE70;
+$rotation: 360deg / $numberOfSlices;
+
+
+.mainbox {
+	position: relative;
+	width: 500px;
+	height: 500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.mainbox:after {
+	position: absolute;
+	content: "";
+	width: 100%;
+	height: 100%;
+	background: url(../images/arrow-bottom.png) no-repeat;
+	background-size: 5%;
+	left: 13%;
+	top: 49%;
+	transform: rotate(90deg);
+}
+
+.box {
+	width: calc(100% + 20px);
+	height: calc(100% + 20px);
+	position: relative;
+	border-radius: 50%;
+	border: 10px solid #DBDC14;
+	overflow: hidden;
+	transition: all ease-in-out 5s;
+	transform: rotate(90deg);
+}
+
+.spinner-table {
+	height: ($diameter - 0px);
+	width: ($diameter - 0px);
+	position: relative;
+	border-radius: 100%;
+	overflow: hidden;
+}
+
+.dial {
+	height: 100%;
+	transition: all 5s ease-out;
+	animation-fill-mode: forwards;
+	animation-timing-function: linear;
+	
+	&.spinning {
+		animation-duration: 5s;
+		animation-timing-function: cubic-bezier(0.440, -0.205, 0.000, 1.130);
+		animation-name: spinning;
+	}
+	
+	&:before {
+		content: '';
+		text-align: center;
+		display: block;
+		line-height: 60px;
+		position: absolute;
+		height: 40px;
+		width: 40px;
+		background: white;
+		box-shadow: 0 0 5px 5px rgba(#000, .1);
+		top: 50%;
+		left: 50%;
+		margin-top: -20px;
+		margin-left: -20px;
+		border-radius: 100%;
+		z-index: 200;
+	}
+
+	.slice {
+		z-index: 150;
+		position: absolute;
+		top: calc(50% - #{$sliceOffeset});
+		height: $sliceHeight;
+		left: 50%;
+		width: 50%;
+		color: white;
+		text-align: right;
+		padding-right: 10px;
+		display: block;
+		transform-origin: left center;
+		
+		&:before,
+		&:after {
+			content: "";
+			display: block;
+			width: 0;
+			height: 0;
+			border-style: solid;
+		}
+
+		&:before {
+			margin-bottom: -1px;
+			margin-top: -2px;
+			border-width: 0 0 (($sliceHeight / 2) + 4px) $radius;
+			border-color: transparent transparent $sliceColor transparent;
+		}
+
+		&:after {
+			margin-top: -1px;
+			margin-bottom: -2px;
+			border-width: 0 $radius (($sliceHeight / 2) + 4px) 0;
+			border-color: transparent $sliceColor transparent transparent;
+		}
+		
+		&:nth-child(even) {
+	
+			&:after { border-color: transparent darken($sliceColor, 10%) transparent transparent; }
+			&:before { border-color: transparent transparent darken($sliceColor, 10%) transparent; }
+		}
+
+		.label {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			width: 90%;
+			line-height: $sliceHeight;
+			padding-top: 1px;
+			padding-bottom: 1px;
+			font-size: 16px;
+			text-align: right;
+			padding-left: 20px;
+		}
+
+		&:nth-child(1) {
+			transform: rotate(0deg);
+		}
+		&:nth-child(2) {
+			transform: rotate(30deg);
+		}
+		&:nth-child(3) {
+			transform: rotate(60deg);
+		}
+		&:nth-child(4) {
+			transform: rotate(90deg);
+		}
+		&:nth-child(5) {
+			transform: rotate(120deg);
+		}
+		&:nth-child(6) {
+			transform: rotate(150deg);
+		}
+		&:nth-child(7) {
+			transform: rotate(180deg);
+		}
+		&:nth-child(8) {
+			transform: rotate(210deg);
+		}
+		&:nth-child(9) {
+			transform: rotate(240deg);
+		}
+		&:nth-child(10) {
+			transform: rotate(270deg);
+		}
+		&:nth-child(11) {
+			transform: rotate(300deg);
+		}
+		&:nth-child(12) {
+			transform: rotate(330deg);
+		}
+	}
+}
+
+.spin {
+	position: absolute;
+	top: calc(50% + 10px);
+	left: calc(50% + 10px);
+	transform: translate(-50%, -50%);
+	width: 75px;
+	height: 75px;
+	border-radius: 50%;
+	border: 4px solid white;
+	background-color: $sliceColor;
+	color: #fff;
+	box-shadow: 0 5px 20px #000;
+	font-weight: bold;
+	font-size: 22px;
+	padding: 0px;
+	cursor: pointer;
+	z-index: 1000;
+
+	&:active {
+		width: 70px;
+		height: 70px;
+		font-size: 20px;
+	}
+}
+
+/*
+@keyframes rotating {
+	 from { transform: rotate(0); }
+   to {  transform: rotate(360deg); }
+}
+
+@keyframes spinning {
+	 from { transform: rotate(0); }
+   to {  transform: rotate(330deg); }
+}*/
+
+/*.arrow {
+	position: absolute;
+	height: 30px;
+	width: 50px;
+	left: ($diameter + 30px);
+	z-index: 500;
+	display: block;
+	top: 50%;
+	margin-top: -15px;
+	transform-origin: center right;
+}*/
+
+/*.pointer {
+	z-index: 500;
+	display: block;
+	height: 30px;
+	width: 50px;
+	
+	&:before {
+		content: '';
+		display: block;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: 0 0 15px 50px;
+		border-color: transparent transparent #c27028 transparent;
+	}
+	&:after {
+		content: '';
+		display: block;
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: 0 50px 15px 0;
+		border-color: transparent #c27028 transparent transparent;
+	}
+}*/
+
+/*.board {
+	position: relative;
+	background: white;
+	padding: 50px;
+}
+
+button {
+	background: #c27028;
+	border: 0;
+	padding: 15px 50px;
+	color: white;
+	position: absolute;
+	top: 50%;
+	margin-top: -20px;
+	right: 20%;
+}*/

@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#convert css to scss  https://css2sass.herokuapp.com/
+
+echo 
+echo 
+echo "========================= Cobweb SASS build script v0.1 ========================="
+echo 
+echo "usage:  ./build ---> one time build all scss files "
+echo "usage:  ./build watch ---> monitor all scss files and compile modified "
+echo 
+if [ "$1" == "watch" ]; then
+    echo "WATCH"
+    sass --watch cws-games-wheel-styles.scss:cws-games-wheel-styles.css
+
+else 
+
+    echo -n "build cws-games-wheel-styles.css"
+    sass cws-games-wheel-styles.scss cws-games-wheel-styles.css
+    echo " - done"
+
+fi
+
+echo 
+echo "build done."
+echo
